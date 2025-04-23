@@ -6,14 +6,24 @@
     const now = Date.now();
     if (now - lastClick < COOLDOWN_MS) return;
 
-    const btn = Array.from(
+    // Continue
+    const continueBtn = Array.from(
       document.querySelectorAll('a.monaco-button[role="button"], button.monaco-button')
     ).find(el => /continue/i.test(el.textContent?.trim()));
-
-    if (btn) {
-      btn.click();
+    if (continueBtn) {
+      continueBtn.click();
       lastClick = now;
-      console.log('[copilot-auto-continue] Clicked:', btn);
+      console.log('[auto] Clicked Continue');
+    }
+
+    // Keep
+    const keepBtn = Array.from(
+      document.querySelectorAll('a.action-label[role="button"]')
+    ).find(el => /^keep$/i.test(el.textContent?.trim()));
+    if (keepBtn) {
+      keepBtn.click();
+      lastClick = now;
+      console.log('[auto] Clicked Keep');
     }
   }
 
@@ -24,6 +34,6 @@
   window.stopAutoContinue = () => {
     clearInterval(intervalId);
     observer.disconnect();
-    console.log('[copilot-auto-continue] stopped.');
+    console.log('[auto] stopped.');
   };
 })();
