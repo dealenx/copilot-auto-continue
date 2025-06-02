@@ -7,9 +7,26 @@ A tiny console snippet that automatically clicks the **Continue** button in GitH
 When using Copilot’s **Agent Mode**, every action (even harmless ones like `git status`) prompts you to click **Continue**. This snippet removes that friction by auto‑clicking the button as soon as it appears—no more endless taps!
 ![image](https://github.com/user-attachments/assets/b66a5766-bd1c-4e44-a33c-6006904209e9)
 
+## ⚠️ Important: Script Persistence
+
+**Scripts pasted into the Developer Console are NOT saved and will be lost when you restart VS Code.**
+
+### For Permanent Auto-Loading (Recommended)
+
+Use the [**Custom CSS and JS Loader**](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css) extension to automatically load your script on every VS Code startup:
+
+1. Install the extension from the marketplace
+2. Save the script to a `.js` file
+3. Configure the extension to load your file
+4. Enable custom CSS/JS and restart
+
+This way, the auto-continue functionality will work immediately every time you open VS Code!
+
+---
+
 ## Installation
 
-### Console Paste Method
+### Console Paste Method (Temporary)
 
 1. Open **VS Code** (Desktop or Web).  
 2. Go to **Help → Toggle Developer Tools**.  
