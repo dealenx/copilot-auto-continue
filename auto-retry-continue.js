@@ -167,15 +167,21 @@
         // Проверяем Retry checkbox
         const retryCheckbox = document.querySelector('#retry-checkbox');
         if (retryCheckbox && retryCheckbox.checked) {
-            const retryButton = document.querySelector('.chat-footer-toolbar .actions-container .action-item.menu-entry a[aria-label="Retry"]');
-            if (retryButton) {
-                const now = Date.now();
-                if (now - lastRetryClick >= RETRY_COOLDOWN_MS) {
-                    retryButton.click();
-                    lastRetryClick = now;
-                    incrementRetryCount();
-                    console.log('[auto] Retry button clicked');
+            // Проверяем, нет ли элемента остановки
+            const stopElement = document.querySelector('.action-container .action-label.codicon-stop-circle');
+            if (!stopElement) {
+                const retryButton = document.querySelector('.chat-footer-toolbar .actions-container .action-item.menu-entry a[aria-label="Retry"]');
+                if (retryButton) {
+                    const now = Date.now();
+                    if (now - lastRetryClick >= RETRY_COOLDOWN_MS) {
+                        retryButton.click();
+                        lastRetryClick = now;
+                        incrementRetryCount();
+                        console.log('[auto] Retry button clicked');
+                    }
                 }
+            } else {
+                console.log('[auto] Retry skipped - stop element present');
             }
         }
     }
