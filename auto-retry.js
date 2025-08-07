@@ -71,6 +71,24 @@
 
   function clickIfFound() {
     addTestDiv();
+
+    // Проверяем, включен ли checkbox
+    const checkbox = document.querySelector('#retry-checkbox');
+    if (checkbox && checkbox.checked) {
+      // Проверяем наличие кнопки Retry
+      const retryButton = document.querySelector('.chat-footer-toolbar .actions-container .action-item.menu-entry a[aria-label="Retry"]');
+      if (retryButton) {
+        // Проверяем cooldown
+        const now = Date.now();
+        if (now - lastClick >= COOLDOWN_MS) {
+          retryButton.click();
+          lastClick = now;
+          incrementRetryCount();
+          console.log('[auto] Retry button clicked');
+        }
+      }
+    }
+
     console.log("TEST")
   }
 
