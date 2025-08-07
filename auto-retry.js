@@ -1,7 +1,7 @@
 (function () {
   const COOLDOWN_MS = 5000;
   let lastClick = 0;
-  let testDivAdded = false;
+  let isDivWrapperAdded = false;
   let retryCount = 0;
 
   function updateRetryLabel() {
@@ -17,23 +17,23 @@
     console.log(`[auto] Retry count increased to: ${retryCount}`);
   }
 
-  function addTestDiv() {
-    if (testDivAdded) return;
+  function addDivWrapper() {
+    if (isDivWrapperAdded) return;
 
     const chatInputToolbars = document.querySelector('.chat-input-container .chat-input-toolbars');
     if (chatInputToolbars) {
-      const testDiv = document.createElement('div');
-      testDiv.style.width = '110px';
-      testDiv.style.height = '20px';
-      testDiv.style.background = '#202020ff';
-      testDiv.style.position = 'relative';
-      testDiv.style.borderRadius = '5px';
-      testDiv.style.color = 'white';
-      testDiv.style.fontSize = '12px';
-      testDiv.style.display = 'flex';
-      testDiv.style.alignItems = 'center';
-      testDiv.style.justifyContent = 'center';
-      testDiv.style.gap = '5px';
+      const divWrapper = document.createElement('div');
+      divWrapper.style.width = '110px';
+      divWrapper.style.height = '20px';
+      divWrapper.style.background = '#202020ff';
+      divWrapper.style.position = 'relative';
+      divWrapper.style.borderRadius = '5px';
+      divWrapper.style.color = 'white';
+      divWrapper.style.fontSize = '12px';
+      divWrapper.style.display = 'flex';
+      divWrapper.style.alignItems = 'center';
+      divWrapper.style.justifyContent = 'center';
+      divWrapper.style.gap = '5px';
 
       // Создаем checkbox
       const checkbox = document.createElement('input');
@@ -59,18 +59,18 @@
       label.style.cursor = 'pointer';
 
       // Добавляем checkbox и label в div
-      testDiv.appendChild(checkbox);
-      testDiv.appendChild(label);
+      divWrapper.appendChild(checkbox);
+      divWrapper.appendChild(label);
 
       // Добавляем div после найденного элемента
-      chatInputToolbars.parentNode.insertBefore(testDiv, chatInputToolbars.nextSibling);
-      testDivAdded = true;
+      chatInputToolbars.parentNode.insertBefore(divWrapper, chatInputToolbars.nextSibling);
+      isDivWrapperAdded = true;
       console.log('[auto] Test div with retry checkbox added after .chat-input-container .chat-input-toolbars');
     }
   }
 
   function clickIfFound() {
-    addTestDiv();
+    addDivWrapper();
 
     // Проверяем, включен ли checkbox
     const checkbox = document.querySelector('#retry-checkbox');
@@ -88,12 +88,10 @@
         }
       }
     }
-
-    console.log("TEST")
   }
 
   // Попытка добавить тестовый div при инициализации
-  addTestDiv();
+  addDivWrapper();
 
   const intervalId = setInterval(clickIfFound, 1000);
   const observer = new MutationObserver(clickIfFound);
