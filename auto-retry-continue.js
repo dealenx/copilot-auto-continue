@@ -1,6 +1,6 @@
 (function () {
-    const CONTINUE_COOLDOWN_MS = 2500;
-    const RETRY_COOLDOWN_MS = 5000;
+    const CONTINUE_COOLDOWN_MS = 10000;
+    const RETRY_COOLDOWN_MS = 10000;
     let lastContinueClick = 0;
     let lastRetryClick = 0;
     let isDivWrapperAdded = false;
